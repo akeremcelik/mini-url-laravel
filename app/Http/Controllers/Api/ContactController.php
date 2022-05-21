@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\ContactRequest;
+use App\Jobs\SendContactMailJob;
 
 class ContactController extends Controller
 {
-    public function sendMail() {
-
+    public function sendMail(ContactRequest $request) {
+        SendContactMailJob::dispatch($request->validated());
     }
 }
