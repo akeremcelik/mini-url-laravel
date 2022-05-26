@@ -31,7 +31,7 @@ class Contact extends Mailable
     {
         return $this->subject('New Mail via Contact Form')
                     ->from($this->data['from'])
-                    ->to('test@gmail.com')
+                    ->to('a.kerem7celik@gmail.com')
                     ->view('emails.contact');
     }
 }
