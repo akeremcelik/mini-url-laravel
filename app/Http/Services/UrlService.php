@@ -9,13 +9,17 @@ class UrlService {
     public function createKey() {
         do {
             $key = bin2hex(random_bytes(3));
-        } while ($this->findByKey($key));
+        } while ($this->findByKeyWithoutFail($key));
 
         return $key;
     }
 
     public function findByKey($key) {
         return Url::where('key', $key)->firstOrFail();
+    }
+
+    public function findByKeyWithoutFail($key) {
+        return Url::where('key', $key)->first();
     }
 
     public function createUrl($request) {
