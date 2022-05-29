@@ -15,7 +15,7 @@ class UrlService {
     }
 
     public function findByKey($key) {
-        return Url::where('key', $key)->first();
+        return Url::where('key', $key)->firstOrFail();
     }
 
     public function createUrl($request) {
