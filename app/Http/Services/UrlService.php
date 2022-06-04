@@ -23,11 +23,20 @@ class UrlService {
     }
 
     public function createUrl($request) {
+        $this->sendRequestToUrl($request["url"]);
         return DB::transaction(function() use($request) {
             return Url::create([
                 'key' => $this->createKey(),
                 'url' => $request["url"]
             ]);
         });
+    }
+
+    public function sendRequestToUrl($url) {
+        try {
+            file_get_contents($url);
+        } catch (\Exception $e) {
+            throw new \ErrorException('Host not found connected to the URL');
+        }
     }
 }
